@@ -20,9 +20,5 @@ export interface Podcast {
     uri: string;
 }
 
-export interface FavoritesContextType {
-    favorites: Podcast[];
-    addFavorite: (podcast: Podcast) => void;
-    removeFavorite: (id: string) => void;
-}
+
 

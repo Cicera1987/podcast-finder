@@ -6,7 +6,7 @@ import { Icons } from "@/components/atomic";
 import { Podcast } from "@/types";
 
 export default function FavoritesPodcast() {
-    const { favorites, removeFavorite } = useFavorites();
+    const { favorites =[], removeFavorite } = useFavorites();
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {

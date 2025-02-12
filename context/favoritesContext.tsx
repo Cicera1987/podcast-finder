@@ -1,13 +1,17 @@
 "use client"
 
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { FavoritesContextType, Podcast } from "../types";
-
+import { Podcast } from "../types";
+interface FavoritesContextType {
+    favorites: Podcast[];
+    addFavorite: (podcast: Podcast) => void;
+    removeFavorite: (id: string) => void;
+}
 interface ProviderProps{
     children: ReactNode;
 }
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined)
+const FavoritesContext = createContext({} as FavoritesContextType);
 
 export const FavoritesProvider = ({children}: ProviderProps) =>{
     const [favorites, setFavorites]=useState<Podcast[]>([])
