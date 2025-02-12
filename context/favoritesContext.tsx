@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { FavoritesContextType, Podcast } from "../types";
 
-interface ProviderProps {
+interface ProviderProps{
     children: ReactNode;
 }
 
-const FavoritesContext = createContext < FavoritesContextType | undefined > (undefined);
+const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined)
 
-export const FavoritesProvider = ({ children }: ProviderProps) => {
-    const [favorites, setFavorites] = useState < Podcast[] > ([]);
+export const FavoritesProvider = ({children}: ProviderProps) =>{
+    const [favorites, setFavorites]=useState<Podcast[]>([])
 
     useEffect(() => {
         const storedFavorites = localStorage.getItem("favorites");
@@ -19,7 +19,7 @@ export const FavoritesProvider = ({ children }: ProviderProps) => {
         }
     }, []);
 
-   
+
     useEffect(() => {
         localStorage.setItem("favorites", JSON.stringify(favorites));
     }, [favorites]);
@@ -37,9 +37,12 @@ export const FavoritesProvider = ({ children }: ProviderProps) => {
             {children}
         </FavoritesContext.Provider>
     );
-};
+}
 
 export const useFavorites = () => {
     const context = useContext(FavoritesContext);
+    if (!context) {
+        throw new Error("useFavorites deve ser usado dentro de um FavoritesProvide");
+    }
     return context;
 };
