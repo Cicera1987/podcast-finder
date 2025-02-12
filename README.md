@@ -38,7 +38,7 @@ Rota sobre a aplicação, onde são apresentadas informações sobre o Podcast F
 
     ```bash
 ### 1. Clone o repositório
-    git clone https://github.com/bruno-gomes97/podcast-finder.git
+    git clone https://github.com/Cicera1987/podcast-finder.git
 
 ### 2. Instale as dependências
     npm install
