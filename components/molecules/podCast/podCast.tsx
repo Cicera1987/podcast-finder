@@ -22,19 +22,6 @@ export default function Podcasts() {
     const [selectedCategory, setSelectedCategory] = useState < string > ("Café");
     const { favorites, addFavorite } = useFavorites();
 
-    useEffect(() => {
-        if (favorites.length > 0) {
-            localStorage.setItem("favorites", JSON.stringify(favorites));
-        }
-    }, [favorites]);
-
-
-    useEffect(() => {
-        const storedFavorites = localStorage.getItem("favorites");
-        if (storedFavorites) {
-            addFavorite(JSON.parse(storedFavorites));
-        }
-    }, [addFavorite]);
     
     useEffect(() => {
         async function fetchPodcasts() {

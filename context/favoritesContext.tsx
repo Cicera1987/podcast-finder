@@ -1,16 +1,28 @@
-"use client"
+"use client";
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { FavoritesContextType, Podcast } from "../types";
 
-interface ProviderProps{
+interface ProviderProps {
     children: ReactNode;
 }
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined)
+const FavoritesContext = createContext < FavoritesContextType | undefined > (undefined);
 
-export const FavoritesProvider = ({children}: ProviderProps) =>{
-    const [favorites, setFavorites]=useState<Podcast[]>([])
+export const FavoritesProvider = ({ children }: ProviderProps) => {
+    const [favorites, setFavorites] = useState < Podcast[] > ([]);
+
+    useEffect(() => {
+        const storedFavorites = localStorage.getItem("favorites");
+        if (storedFavorites) {
+            setFavorites(JSON.parse(storedFavorites));
+        }
+    }, []);
+
+   
+    useEffect(() => {
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    }, [favorites]);
 
     const addFavorite = (podcast: Podcast) => {
         setFavorites((prevFavorites) => [...prevFavorites, podcast]);
@@ -25,7 +37,7 @@ export const FavoritesProvider = ({children}: ProviderProps) =>{
             {children}
         </FavoritesContext.Provider>
     );
-}
+};
 
 export const useFavorites = () => {
     const context = useContext(FavoritesContext);
