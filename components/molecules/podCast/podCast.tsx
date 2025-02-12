@@ -23,14 +23,27 @@ export default function Podcasts() {
     const { favorites, addFavorite } = useFavorites();
 
     useEffect(() => {
+        if (favorites.length > 0) {
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+        }
+    }, [favorites]);
+
+
+    useEffect(() => {
+        const storedFavorites = localStorage.getItem("favorites");
+        if (storedFavorites) {
+            addFavorite(JSON.parse(storedFavorites));
+        }
+    }, [addFavorite]);
+    
+    useEffect(() => {
         async function fetchPodcasts() {
             const podcastsData = await searchPodcasts(selectedCategory);
-            console.log('podcastsData: ', podcastsData);
 
             const formattedPodcasts = podcastsData.map((podcast: Podcast) => ({
                 id: podcast.id,
                 name: podcast.name,
-                image: podcast.images[0]?.url || '',
+                images: podcast.images,
                 url: podcast.external_urls.spotify,
             }));
 
@@ -72,14 +85,14 @@ export default function Podcasts() {
                     podcasts.map((podcast) => (
                         <div key={podcast.id} className="bg-white rounded-lg shadow-lg overflow-hidden relative">
                             <img
-                                src={podcast.image}
+                                src={podcast.images[0].url}
                                 alt={podcast.name}
                                 className="w-full h-48 object-cover"
                             />
                             <div className="p-4">
                                 <h3 className="text-xl font-semibold mb-2 truncate">{podcast.name}</h3>
                                 <a
-                                    href={podcast.url}
+                                    href={podcast.uri}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-blue-500 hover:underline"

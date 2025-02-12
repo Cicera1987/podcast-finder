@@ -16,14 +16,14 @@ export default function Favorites() {
                     favorites.map((podcast: Podcast) => (
                         <div key={podcast.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
                             <img
-                                src={podcast.image}
+                                src={podcast.images[0].url}
                                 alt={podcast.name}
                                 className="w-full h-48 object-cover"
                             />
                             <div className="p-4">
                                 <h2 className="text-xl font-semibold mb-2 truncate">{podcast.name}</h2>
                                 <a
-                                    href={podcast.url}
+                                    href={podcast.uri}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-blue-500 hover:underline"

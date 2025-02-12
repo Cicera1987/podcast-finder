@@ -14,21 +14,10 @@ export interface Podcast {
     external_urls: {
         spotify: string;
     };
-    href: string;
-    html_description: string;
     images:{
-        url:string;
-    };
-    languages: string[];
-    media_type: string;
-    publisher: string;
-    total_episodes: number;
-    type: string;
+        url: string
+    }[];
     uri: string;
-    available_markets: string[];
-    copyrights: string[];
-    explicit: boolean;
-    is_externally_hosted: boolean;
 }
 
 export interface FavoritesContextType {
