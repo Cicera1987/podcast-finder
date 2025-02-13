@@ -23,18 +23,33 @@ export const FavoritesProvider = ({children}: ProviderProps) =>{
         }
     }, []);
 
-
     useEffect(() => {
-        localStorage.setItem("favorites", JSON.stringify(favorites));
+        if (favorites.length > 0) {
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+        } else {
+            localStorage.removeItem("favorites");
+        }
     }, [favorites]);
 
     const addFavorite = (podcast: Podcast) => {
-        setFavorites((prevFavorites) => [...prevFavorites, podcast]);
+        setFavorites((prevFavorites) => {
+            if (prevFavorites.some((fav) => fav.id === podcast.id)) {
+                return prevFavorites;
+            }
+            const updatedFavorites = [...prevFavorites, podcast];
+            localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+            return updatedFavorites;
+        });
     };
 
     const removeFavorite = (id: string) => {
-        setFavorites((prevFavorites) => prevFavorites.filter((podcast) => podcast.id !== id));
+        setFavorites((prevFavorites) => {
+            const updatedFavorites = prevFavorites.filter((podcast) => podcast.id !== id);
+            localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+            return updatedFavorites;
+        });
     };
+
 
     return (
         <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite }}>

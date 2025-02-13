@@ -1,4 +1,4 @@
-import Start from "./Start/page";
+import Start from "./podcast/page";
 
 export default function Home() {
   return (

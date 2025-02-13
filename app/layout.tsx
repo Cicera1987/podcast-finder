@@ -6,7 +6,6 @@ import Footer from "@/components/organisms/footer/footer";
 import Sidebar from "@/components/organisms/sidebar/Sidebar";
 import Header from "@/components/organisms/header/header";
 
-import I18nProvider from "@/i18n/i18nProvider";
 import { FavoritesProvider } from "@/context/favoritesContext";
 
 export const metadata: Metadata = {
@@ -37,15 +36,12 @@ export default function RootLayout({
         className={`${montserrat.variable} ${montserrat.variable} antialiased`}
       >
         <FavoritesProvider>
-          <I18nProvider>
-            <Template
-              header={<Header />}
-              sidebar={<Sidebar />}
-              body={children}
-              footer={<Footer />}
-            />
-          </I18nProvider>
-
+          <Template
+            header={<Header />}
+            sidebar={<Sidebar />}
+            body={children}
+            footer={<Footer />}
+          />
         </FavoritesProvider>
 
       </body>

@@ -1,10 +1,10 @@
-"use client"
-
+""use client"
 import { useEffect, useState } from "react";
-import { Podcast } from "../../../types";
-import { searchPodcasts } from "../../../server/api";
-import { Icons } from "@/components/atomic";
+import { Podcast } from "@/types";
 import { useFavorites } from "@/context/favoritesContext";
+import { searchPodcasts } from "@/server/api";
+import { Icons } from "@/components/atomic";
+import Image from "next/image";
 
 const categories = [
     { id: "Café", name: "Café" },
@@ -22,7 +22,6 @@ export default function Podcasts() {
     const [selectedCategory, setSelectedCategory] = useState < string > ("Café");
     const { favorites, addFavorite } = useFavorites();
 
-    
     useEffect(() => {
         async function fetchPodcasts() {
             const podcastsData = await searchPodcasts(selectedCategory);
@@ -30,7 +29,7 @@ export default function Podcasts() {
             const formattedPodcasts = podcastsData.map((podcast: Podcast) => ({
                 id: podcast.id,
                 name: podcast.name,
-                images: podcast.images,
+                image: podcast.images[0]?.url || '',
                 url: podcast.external_urls.spotify,
             }));
 
@@ -71,15 +70,17 @@ export default function Podcasts() {
                 {podcasts.length > 0 ? (
                     podcasts.map((podcast) => (
                         <div key={podcast.id} className="bg-white rounded-lg shadow-lg overflow-hidden relative">
-                            <img
-                                src={podcast.images[0].url}
+                            <Image
+                                src={podcast.image}
                                 alt={podcast.name}
+                                width={500}
+                                height={300}
                                 className="w-full h-48 object-cover"
                             />
                             <div className="p-4">
                                 <h3 className="text-xl font-semibold mb-2 truncate">{podcast.name}</h3>
                                 <a
-                                    href={podcast.uri}
+                                    href={podcast.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-blue-500 hover:underline"

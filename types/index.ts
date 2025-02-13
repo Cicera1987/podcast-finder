@@ -1,12 +1,3 @@
-import { ReactNode } from "react";
-
-export interface MenuProps {
-    title: string;
-    icon: ReactNode;
-    href: string;
-    onClick?: () => void;
-}
-
 export interface Podcast {
     id: string;
     name: string;
@@ -14,11 +5,20 @@ export interface Podcast {
     external_urls: {
         spotify: string;
     };
-    images:{
-        url: string
+    images: {
+        url: string;
     }[];
-    uri: string;
+    url: string;
+    image: string;
 }
-
-
+export interface PodcastFavorites {
+    id: string;
+    name: string;
+    description: string;
+    external_urls: {
+        spotify: string;
+    };
+    image: string;
+    url: string;
+}
 
