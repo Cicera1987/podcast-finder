@@ -1,7 +1,7 @@
 "use client";
 
 import { Icons } from "@/components/atomic";
-import MenuItems from "@/components/molecules/menu/MenuItems";
+import MenuItems, { MenuProps } from "@/components/molecules/menu/MenuItems";
 
 export default function Sidebar() {
 

@@ -1,4 +1,4 @@
-""use client"
+"use client"
 import { useEffect, useState } from "react";
 import { Podcast } from "@/types";
 import { useFavorites } from "@/context/favoritesContext";
