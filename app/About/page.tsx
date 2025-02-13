@@ -1,4 +1,5 @@
 "use client"
+
 import CreditsList from "@/components/molecules/creditsList/CreditsList";
 import InfoSection from "@/components/molecules/infoSection/InfoSection";
 
